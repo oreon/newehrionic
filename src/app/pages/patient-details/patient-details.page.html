@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ entity?.lastname }},{{ entity?.firstname }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding>
+ 
+  <ion-card *ngIf="entity">
+    <ion-card-header>
+      <ion-card-title>
+        {{ entity.birthday }}
+      </ion-card-title>
+      <ion-card-subtitle>
+        {{ entity.displayTill }}
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content text-center>
+      <img [src]="entity.image" class="info-img">
+      {{ entity.description }}
+    
+ 
+      <ion-item lines="none">
+        <ion-icon name="star-half" slot="start"></ion-icon>
+        <ion-label>{{ entity.birthday }}</ion-label>
+      </ion-item>
+ 
+      
+      <ion-button expand="full" (click)="openWebsite()" *ngIf="entity.Website && entity.Website != 'N/A'">
+        <ion-icon name="open" slot="start"></ion-icon>
+        Open Website
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>
