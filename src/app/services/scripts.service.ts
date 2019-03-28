@@ -5,20 +5,20 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { BaseService } from '../base/baseservice';
-import { Note } from '../entities/note';
+
 import { MessageService } from '../base/message-service';
 import { getUrl } from '@ionic/angular/dist/directives/navigation/stack-utils';
 import { PatientService } from './patients.service';
-
+import { Script } from '../entities/script.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class NoteService  extends BaseService<Note>{
+export class ScriptService  extends BaseService<Script>{
   
   readonly parentEndpoint = 'patients'
-  readonly endpoint = 'notes'
+  readonly endpoint = 'scripts'
 
   getFetchAllUrl(filter): string {
     return `${this.url}/${this.parentEndpoint}/${filter}/${this.endpoint}`

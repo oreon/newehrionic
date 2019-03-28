@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Notes</ion-title>
+    <ion-title>Scripts</ion-title>
     <ion-buttons slot="start">
         <ion-back-button ></ion-back-button>
       </ion-buttons>
@@ -33,10 +33,10 @@
           </ion-card-subtitle>
         </ion-card-header>
         <ion-card-content text-center>
-          {{ entity.description }}
+          {{ entity.notes }}
         </ion-card-content>
       </ion-card>
     </ion-item>
   </ion-list>
-  <ion-fab-button color="primary"  routerLink="/add-note">+</ion-fab-button>
+  <ion-fab-button color="primary"  routerLink="/add-script">+</ion-fab-button>
 </ion-content>

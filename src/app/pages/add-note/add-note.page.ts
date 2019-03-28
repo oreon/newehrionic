@@ -24,9 +24,13 @@ export class AddNotePage implements OnInit {
     });
   }
 
+  submitAttempt = false;
   submit() {
-    console.log("what is goin on");
+    this.submitAttempt = true;
+   
     console.log(this.formGroup.value);
+    if(!this.formGroup.valid)
+      return;
     this.noteService.add(this.formGroup.value).subscribe(
       x => this.location.back()
     )
