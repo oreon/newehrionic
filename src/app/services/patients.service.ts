@@ -53,4 +53,6 @@ export class PatientService extends BaseService<Patient>{
   getDetails(id) {
     return super.get(id)
   }
+
+  
 }
