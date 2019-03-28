@@ -29,9 +29,9 @@
       </ion-item>
  
       
-      <ion-button expand="full" (click)="openWebsite()" *ngIf="entity.Website && entity.Website != 'N/A'">
+      <ion-button expand="full" routerLink="/notes/{{entity.id}}" >
         <ion-icon name="open" slot="start"></ion-icon>
-        Open Website
+        Notes
       </ion-button>
     </ion-card-content>
   </ion-card>

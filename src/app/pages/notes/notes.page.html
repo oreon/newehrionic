@@ -1,9 +1,42 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>notes</ion-title>
+    <ion-title>Notes</ion-title>
+    <ion-buttons slot="start">
+        <ion-back-button ></ion-back-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <ion-searchbar
+    [formControl]="searchControl"
+    (ionChange)="onSearchInput()"
+  ></ion-searchbar>
 
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  
+  <ion-list *ngIf="entities">
+    
+    <ion-item button *ngFor="let entity of items" >
+      <!-- <ion-avatar slot="start">
+              <img [src]="item.Poster" *ngIf="item.Poster != 'N/A'">
+            </ion-avatar> -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            {{ entity.author }}
+          </ion-card-title>
+          <ion-card-subtitle>
+            {{ entity.created }}
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content text-center>
+          {{ entity.description }}
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <ion-fab-button color="primary"  routerLink="/add-note">+</ion-fab-button>
 </ion-content>

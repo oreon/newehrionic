@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+import { BaseService } from '../base/baseservice';
+import { MessageService } from '../base/message-service';
 
 export enum SearchType {
   all = '',
@@ -16,16 +19,18 @@ export enum SearchType {
 @Injectable({
   providedIn: 'root'
 })
-export class PatientService {
-  url = 'http://localhost:8000/api/v1';
+export class PatientService extends BaseService<Patient>{
+  
   endpoint = 'patients'
-  apiKey = ''; // <-- Enter your own key here!
- 
+  
   /**
    * Constructor of the Service with Dependency Injection
    * @param http The standard Angular HttpClient to make requests
    */
-  constructor(private http: HttpClient) { }
+  constructor(protected http: HttpClient, 
+    protected messageService:MessageService) { 
+      super(http, messageService)
+    }
  
   /**
   * Get data from the OmdbApi 
@@ -36,9 +41,7 @@ export class PatientService {
   * @returns Observable with the search results
   */
   searchData(title: string): Observable<any> {
-    return this.http.get(`${this.url}/${this.endpoint}?search=${encodeURI(title)}`).pipe(
-      map( (results:any) =>  results.results)
-    );
+    return super.searchRecords(title)
   }
  
   /**
@@ -48,6 +51,6 @@ export class PatientService {
   * @returns Observable with detailed information
   */
   getDetails(id) {
-    return this.http.get(`${this.url}/${this.endpoint}/${id}`);
+    return super.get(id)
   }
 }

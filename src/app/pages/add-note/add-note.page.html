@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Note</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="formGroup">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Description</ion-label>
+        <ion-input formControlName="description" type="text"> </ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-row class="signin">
+      <ion-col>
+        <ion-button
+          (click)="submit()"
+          color="primary"
+          shape="full"
+          expand="block"
+          >Add</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </form>
+  </ion-content
+>
