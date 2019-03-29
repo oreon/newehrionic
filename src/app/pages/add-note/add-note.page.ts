@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 
-import { Location } from '@angular/common';
+import { Location } from "@angular/common";
 
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { NoteService } from '../../services/notes.service';
-import { Router } from '@angular/router';
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { NoteService } from "../../services/notes.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-add-note",
@@ -14,31 +14,27 @@ import { Router } from '@angular/router';
 export class AddNotePage implements OnInit {
   public formGroup: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, 
-    public noteService:NoteService,
-  public router:Router,
-  private location: Location
-) {
+  constructor(
+    public formBuilder: FormBuilder,
+    public noteService: NoteService,
+    public router: Router,
+    private location: Location
+  ) {
     this.formGroup = formBuilder.group({
-      description: ["", Validators.required],
+      description: ["", Validators.required]
     });
   }
 
   submitAttempt = false;
+
   submit() {
     this.submitAttempt = true;
-   
-    console.log(this.formGroup.value);
-    if(!this.formGroup.valid)
-      return;
-    this.noteService.add(this.formGroup.value).subscribe(
-      x => this.location.back()
-    )
-    
-    //this.router.navigateByUrl("/referring-physician");
+
+    if (!this.formGroup.valid) return;
+    this.noteService
+      .add(this.formGroup.value)
+      .subscribe(x => this.location.back());
   }
 
-  ngOnInit(){
-
-  }
+  ngOnInit() {}
 }

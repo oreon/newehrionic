@@ -5,22 +5,23 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddScriptPage } from './add-script.page';
+import { AddScriptItemPage } from './add-script-item.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AddScriptPage
+    component: AddScriptItemPage
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AddScriptPage]
+  declarations: [AddScriptItemPage]
 })
-export class AddScriptPageModule {}
+export class AddScriptItemPageModule {}

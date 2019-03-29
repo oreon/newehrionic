@@ -42,5 +42,9 @@ export class ScriptService  extends BaseService<Script>{
     return super.add(note)
   }
 
+  createInstance(){ return <Script>{
+    scriptItems:[]
+  };}
+
   
 }

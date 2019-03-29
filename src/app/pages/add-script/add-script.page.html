@@ -5,5 +5,47 @@
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="formGroup">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Notes</ion-label>
+        <ion-input formControlName="notes" type="text"> </ion-input>
+      </ion-item>
 
+      <ion-item
+        *ngIf="
+          !formGroup.controls.notes.valid &&
+          (formGroup.controls.notes.valid || submitAttempt)
+        "
+      >
+        <p>Please enter description</p>
+      </ion-item>
+    </ion-list>
+
+    <ion-row class="signin">
+      <ion-col>
+        <ion-button
+          (click)="submit()"
+          color="primary"
+          shape="full"
+          expand="block"
+          >Add</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <ion-list>
+    <ion-item
+      button
+      *ngFor="let entity of getEntity().scriptItems; index as i"
+      [routerLink]="['/', 'edit-script-item', i]"
+    >
+      {{ entity.drug }} {{ entity.frequency }} {{ entity.duration }}
+    </ion-item>
+  </ion-list>
+
+  <ion-fab-button color="primary" routerLink="/add-script-item"
+    >+Drug</ion-fab-button
+  >
 </ion-content>

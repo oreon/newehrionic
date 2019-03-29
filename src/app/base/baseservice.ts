@@ -20,6 +20,20 @@ export abstract class BaseService<T> {
 
   current:T
 
+  createInstance(){ return <T>{};}
+
+  resetCurrent (){ 
+    this.current = this.createInstance()
+  }
+
+  get currentItem():T{
+   
+    if (this.current === null || this.current === undefined){
+      this.current = this.createInstance();
+    }
+    return this.current;
+  }
+
   getAll(filter?:any){
     return this.http.get<T[]>(`${this.getFetchAllUrl(filter)}`).pipe(
       map((x:any) => x.results),

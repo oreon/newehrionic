@@ -18,4 +18,8 @@ export class ScriptsPage extends BaseListPage<Script> implements OnInit {
     super(service, activatedRoute )
   }
 
+  getEntity(){
+    return this.service.currentItem;
+  }
+
 }

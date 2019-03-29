@@ -10,6 +10,8 @@ const routes: Routes = [
   { path: 'add-note', loadChildren: './pages/add-note/add-note.module#AddNotePageModule' },
   { path: 'add-script', loadChildren: './pages/add-script/add-script.module#AddScriptPageModule' },
   { path: 'scripts/:id', loadChildren: './pages/scripts/scripts.module#ScriptsPageModule' },
+  { path: 'add-script-item', loadChildren: './pages/add-script-item/add-script-item.module#AddScriptItemPageModule' },
+  { path: 'edit-script-item/:id', loadChildren: './pages/add-script-item/add-script-item.module#AddScriptItemPageModule' },
 ];
 
 @NgModule({

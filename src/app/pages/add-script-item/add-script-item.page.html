@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Manage ScriptItem</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="scriptItemForm">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Drug * </ion-label>
+        <ion-input
+          formControlName="drug"
+          id="drug-input"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.drug.errors }"
+          type="text"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item class="invalid-feedback" *ngIf="submitted && f.drug.errors">
+        <p *ngIf="f.drug.errors.required">Required !</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Frequency * </ion-label>
+        <ion-input
+          formControlName="frequency"
+          id="frequency-input"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.frequency.errors }"
+          type="text"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item
+        class="invalid-feedback"
+        *ngIf="submitted && f.frequency.errors"
+      >
+        <p *ngIf="f.frequency.errors.required">Required !</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Duration * </ion-label>
+        <ion-input
+          type="number"
+          formControlName="duration"
+          id="duration-input"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.duration.errors }"
+        ></ion-input>
+      </ion-item>
+      <ion-item class="invalid-feedback" *ngIf="submitted && f.duration.errors">
+        <p *ngIf="f.duration.errors.required">Required !</p>
+      </ion-item>
+
+    
+     
+    </ion-list>
+    <ion-row class="signin">
+      <ion-col>
+        <ion-button
+          (click)="submit()"
+          color="primary"
+          shape="full"
+          expand="block"
+          >Add</ion-button
+        >
+      </ion-col>
+    </ion-row>
+
+   
+  </form>
+
+  <ion-row *ngIf="id">
+      <ion-col>
+        <ion-button
+          (click)="delete()"
+          color="red"
+          shape="full"
+          expand="block"
+          >Delete</ion-button
+        >
+      </ion-col>
+    </ion-row>
+</ion-content>
