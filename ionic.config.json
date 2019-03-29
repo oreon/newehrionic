@@ -1,5 +1,7 @@
 {
   "name": "ptsApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
