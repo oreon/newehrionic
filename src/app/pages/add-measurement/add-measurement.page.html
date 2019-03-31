@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Note</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Measurement type * </ion-label>
+        <ion-select placeholder="Select One"
+          formControlName="measurementType"
+          [ngClass]="{ 'is-invalid': submitted && f.measurementType.errors }"
+        >
+        
+          <ion-select-option *ngFor="let e of measurementTypes$ | async" value="{{e.id}}">{{e.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item
+        class="invalid-feedback"
+        *ngIf="submitted && f.measurementType.errors"
+      >
+        <p *ngIf="f.measurementType.errors.required">Required !</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Value * </ion-label>
+        <ion-input
+          type="number"
+          formControlName="value"
+          id="value-input"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.value.errors }"
+        ></ion-input>
+      </ion-item>
+      <ion-item class="invalid-feedback" *ngIf="submitted && f.value.errors">
+        <p *ngIf="f.value.errors.required">Required !</p>
+      </ion-item>
+    </ion-list>
+    <ion-row class="signin">
+      <ion-col>
+        <ion-button
+          (click)="submit()"
+          color="primary"
+          shape="full"
+          expand="block"
+          >Add</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

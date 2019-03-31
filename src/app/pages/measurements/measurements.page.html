@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Measurements</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-fab-button color="primary" routerLink="/add-measurement"
+    >+</ion-fab-button
+  >
+
+<!-- <canvas #lineCanvas >
+</canvas> -->
+<!-- <ion-button (click)="draw()" >draw</ion-button> -->
+  <ion-list>
+    <ion-item *ngFor="let grp of groups" >
+      <h3> {{grp.measurementType}}</h3>
+      <canvas #lineCanvas >
+      </canvas>
+      <!-- <ion-item button *ngFor="let val of grp.vals">
+        {{ val.created | date }} {{ val.value }}
+      </ion-item> -->
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item button *ngFor="let entity of entities">
+      <p #para>
+      {{ entity.created | date }} {{ entity.value }}
+      </p>
+    </ion-item>
+  </ion-list>
+</ion-content>

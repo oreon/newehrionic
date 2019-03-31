@@ -12,6 +12,8 @@ const routes: Routes = [
   { path: 'scripts/:id', loadChildren: './pages/scripts/scripts.module#ScriptsPageModule' },
   { path: 'add-script-item', loadChildren: './pages/add-script-item/add-script-item.module#AddScriptItemPageModule' },
   { path: 'edit-script-item/:id', loadChildren: './pages/add-script-item/add-script-item.module#AddScriptItemPageModule' },
+  { path: 'measurements/:id', loadChildren: './pages/measurements/measurements.module#MeasurementsPageModule' },
+  { path: 'add-measurement', loadChildren: './pages/add-measurement/add-measurement.module#AddMeasurementPageModule' },
 ];
 
 @NgModule({

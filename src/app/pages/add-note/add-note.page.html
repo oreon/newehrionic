@@ -7,14 +7,15 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <form [formGroup]="formGroup">
+  <form [formGroup]="form">
     <ion-list>
       <ion-item>
         <ion-label position="stacked">Description</ion-label>
         <ion-input formControlName="description" type="text"> </ion-input>
       </ion-item>
 
-      <ion-item *ngIf="!formGroup.controls.description.valid  && (formGroup.controls.description.valid || submitAttempt)">
+      <ion-item *ngIf="!form.controls.description.valid  
+      && (form.controls.description.valid || submitAttempt)">
         <p>Please enter description</p>
       </ion-item>
     </ion-list>

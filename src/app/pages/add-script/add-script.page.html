@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="formGroup">
+  <form [formGroup]="form">
     <ion-list>
       <ion-item>
         <ion-label position="stacked">Notes</ion-label>
@@ -14,8 +14,8 @@
 
       <ion-item
         *ngIf="
-          !formGroup.controls.notes.valid &&
-          (formGroup.controls.notes.valid || submitAttempt)
+          !form.controls.notes.valid &&
+          (form.controls.notes.valid || submitAttempt)
         "
       >
         <p>Please enter description</p>

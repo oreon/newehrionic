@@ -34,9 +34,11 @@ export abstract class BaseService<T> {
     return this.current;
   }
 
+  getResults = x => x.results ? x.results : x
+
   getAll(filter?:any){
     return this.http.get<T[]>(`${this.getFetchAllUrl(filter)}`).pipe(
-      map((x:any) => x.results),
+      map(this.getResults),
       tap(x => console.log('found records',x)),
       catchError(this.handleError<T[]>("searchrecords", []))
     );
@@ -62,7 +64,7 @@ export abstract class BaseService<T> {
     return this.http.get<T[]>(`${this.getUrl()}?search=${term}`).pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      map((x:any) => x.results),
+      map(this.getResults),
       tap(x => this.log(`found records matching "${term}" -> ${x}`)),
       catchError(this.handleError<T[]>("searchrecords", []))
     );
