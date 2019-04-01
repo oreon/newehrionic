@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Patient</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">First name * </ion-label>
+        <ion-input
+          formControlName="firstName"
+          id="firstName-input"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+          type="text"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item
+        class="invalid-feedback"
+        *ngIf="submitted && f.firstName.errors"
+      >
+        <p *ngIf="f.firstName.errors.required">Required !</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Last name * </ion-label>
+        <ion-input
+          formControlName="lastName"
+          id="lastName-input"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+          type="text"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item class="invalid-feedback" *ngIf="submitted && f.lastName.errors">
+        <p *ngIf="f.lastName.errors.required">Required !</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Gender * </ion-label>
+        <ion-select placeholder="Select One" formControlName="gender">
+          <ion-select-option value="Male">MALE</ion-select-option>
+          <ion-select-option value="Female">FEMALE</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="invalid-feedback" *ngIf="submitted && f.gender.errors">
+        <p *ngIf="f.gender.errors.required">Required !</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Dob * </ion-label>
+        <ion-datetime display-format="MMM DD, YYYY" formControlName="dob"></ion-datetime>
+      </ion-item>
+      <ion-item class="invalid-feedback" *ngIf="submitted && f.dob.errors">
+        <p *ngIf="f.dob.errors.required">Required !</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Pmf </ion-label>
+        <ion-textarea
+          formControlName="pmf"
+          id="pmf-input"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.pmf.errors }"
+        ></ion-textarea>
+      </ion-item>
+      <ion-item class="invalid-feedback" *ngIf="submitted && f.pmf.errors">
+        <p *ngIf="f.pmf.errors.required">Required !</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Fmh </ion-label>
+        <ion-textarea
+          formControlName="fmh"
+          id="fmh-input"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.fmh.errors }"
+          type="text"
+        >
+        </ion-textarea>
+      </ion-item>
+      <ion-item class="invalid-feedback" *ngIf="submitted && f.fmh.errors">
+        <p *ngIf="f.fmh.errors.required">Required !</p>
+      </ion-item>
+    </ion-list>
+    <ion-row class="signin">
+      <ion-col>
+        <ion-button
+          (click)="submit()"
+          color="primary"
+          shape="full"
+          expand="block"
+          >Add</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

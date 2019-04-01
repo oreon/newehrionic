@@ -1,16 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
 import { PatientsPage } from './patients.page';
+import { AddEditPatientComponent } from './add-edit-patients/add-edit-patients.component';
 
 const routes: Routes = [
   {
     path: '',
     component: PatientsPage
+  },
+  {
+    path: 'edit/:id',
+    component: AddEditPatientComponent
+  },
+  {
+    path: 'add',
+    component: AddEditPatientComponent
   }
 ];
 
@@ -18,9 +27,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [PatientsPage]
+  declarations: [PatientsPage, AddEditPatientComponent]
 })
 export class PatientsPageModule {}

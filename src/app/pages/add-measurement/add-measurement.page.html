@@ -15,7 +15,7 @@
           formControlName="measurementType"
           [ngClass]="{ 'is-invalid': submitted && f.measurementType.errors }"
         >
-        
+    
           <ion-select-option *ngFor="let e of measurementTypes$ | async" value="{{e.id}}">{{e.name}}</ion-select-option>
         </ion-select>
       </ion-item>

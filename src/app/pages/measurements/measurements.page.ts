@@ -51,6 +51,14 @@ export class MeasurementsPage extends BaseListPage<Measurement>
 
   ngOnInit() {}
 
+  tab = 'charts';
+
+  show(tab) {
+    this.tab = tab;
+    if( tab === 'charts')
+      this.draw()
+  }
+
   ngAfterViewInit(): void {
     //console.log('canvases in avi', this.canvases)
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
@@ -61,6 +69,21 @@ export class MeasurementsPage extends BaseListPage<Measurement>
   ionViewDidEnter() {
     console.log("view entered");
     this.draw();
+  }
+
+  ionViewWillEnter() {
+    console.log("view will entered");
+    this.draw();
+  }
+
+  ionViewWilLeave() {
+    console.log("view will leave");
+    this.draw();
+  }
+
+  ngAfterContentInit(): void {
+    console.log("after content init");
+    
   }
 
   draw() {

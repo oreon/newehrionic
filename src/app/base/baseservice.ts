@@ -77,7 +77,7 @@ export abstract class BaseService<T> {
     console.log('posting to ', this.getUrl())
     return this.http.post<T>(this.getUrl(), entity, httpOptions).pipe(
      tap((entity: T) => this.log(`added entityw/ id=${entity['id']}`)),
-      catchError(this.handleError<T>("addHero"))
+      catchError(this.handleError<T>("add record"))
     );
   }
 
@@ -88,7 +88,7 @@ export abstract class BaseService<T> {
 
     this.http.delete<T>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted entityid=${id}`)),
-      catchError(this.handleError<T>("deleteHero"))
+      catchError(this.handleError<T>("delete record"))
     );
 
     return of(id);
@@ -98,7 +98,7 @@ export abstract class BaseService<T> {
   update(entity :T): Observable<any> {
     this.http.put(this.getUrl(), entity, httpOptions).pipe(
       tap(_ => this.log(`updated entityid=${entity['id']}`)),
-      catchError(this.handleError<any>("updateHero"))
+      catchError(this.handleError<any>("update record"))
     );
 
     return of(entity);
@@ -123,9 +123,9 @@ export abstract class BaseService<T> {
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+  /** Log a  recordService message with the MessageService */
   private log(message: string) {
-    this.messageService.add("HeroService: " + message);
+    this.messageService.add(" recordService: " + message);
   }
 
   url = environment.host

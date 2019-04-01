@@ -4,30 +4,43 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
   <ion-fab-button color="primary" routerLink="/add-measurement"
     >+</ion-fab-button
   >
 
-<!-- <canvas #lineCanvas >
-</canvas> -->
-<!-- <ion-button (click)="draw()" >draw</ion-button> -->
-  <ion-list>
-    <ion-item *ngFor="let grp of groups" >
-      <h3> {{grp.measurementType}}</h3>
-      <canvas #lineCanvas >
-      </canvas>
-      <!-- <ion-item button *ngFor="let val of grp.vals">
-        {{ val.created | date }} {{ val.value }}
-      </ion-item> -->
-    </ion-item>
-  </ion-list>
+<div class="my-tabs">
+    <div class="my-tabs-inner">
+    <ng-container *ngIf="tab === 'charts'">
+      <ion-list>
+        <ion-item *ngFor="let grp of groups">
+          <h3>{{ grp.measurementType }}</h3>
+          <canvas #lineCanvas> </canvas>
+          <!-- <ion-item button *ngFor="let val of grp.vals">
+                {{ val.created | date }} {{ val.value }}
+              </ion-item> -->
+        </ion-item>
+      </ion-list>
+    </ng-container>
+    <ng-container *ngIf="tab === 'tabular'">
+      <ion-list>
+        <ion-item button *ngFor="let entity of entities">
+          <p #para>{{ entity.created | date }} {{ entity.value }}</p>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+    </div>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home" (click)="show('charts')">
+        <ion-label>Charts</ion-label>
+        <ion-icon name="home"></ion-icon>
+        <ion-badge>6</ion-badge>
+      </ion-tab-button>
 
-  <ion-list>
-    <ion-item button *ngFor="let entity of entities">
-      <p #para>
-      {{ entity.created | date }} {{ entity.value }}
-      </p>
-    </ion-item>
-  </ion-list>
+      <ion-tab-button tab="settings" (click)="show('tabular')">
+        <ion-label>Tabular</ion-label>
+        <ion-icon name="settings"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+ </div>
 </ion-content>
