@@ -26,6 +26,8 @@ export abstract class BaseService<T> {
     this.current = this.createInstance()
   }
 
+  set currentItem(t:T){ this.current =t ; }
+
   get currentItem():T{
    
     if (this.current === null || this.current === undefined){
@@ -74,7 +76,8 @@ export abstract class BaseService<T> {
 
   /** POST: add a new entityto the server */
   add(entity :T): Observable<T> {
-    console.log('posting to ', this.getUrl())
+    console.log(this)
+    //console.log('posting to ', this.getUrl())
     return this.http.post<T>(this.getUrl(), entity, httpOptions).pipe(
      tap((entity: T) => this.log(`added entityw/ id=${entity['id']}`)),
       catchError(this.handleError<T>("add record"))

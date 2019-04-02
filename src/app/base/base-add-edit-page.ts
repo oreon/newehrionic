@@ -5,6 +5,7 @@ import { Route, Router, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import * as _ from "lodash";
 import { BaseService } from './baseservice';
+import { Observable, of } from 'rxjs';
 
 export abstract class BaseAddEditPage {
   public form: FormGroup;
@@ -20,7 +21,10 @@ export abstract class BaseAddEditPage {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if(this.id){
       this.service.get(+this.id).subscribe(
-        x => this.form.setValue(x)
+        x => { 
+          x = _.omit(x, ['id']);
+          this.form.setValue(x)
+      }
       )
     }
   }
@@ -50,20 +54,33 @@ export abstract class BaseAddEditPage {
     return this.form.controls;
   }
 
+  op (x) :Observable<any> {return of();}
+
   submit() {
     this.submitted = true;
 
     if (!this.form.valid) return;
 
+  
     _.assign(this.service.currentItem, this.form.value);
 
-    let op = this.id ? this.service.update :this.service.add;
-    console.log(op)
+    this.service.currentItem = this.preprocess(this.service.currentItem)
 
-    op(this.service.currentItem).subscribe(x => {
-      this.location.back();
-      this.service.resetCurrent();
-    });
+  //  this.op = this.id ? this.service.update :this.service.add;
+  //   //console.log(op)
+  //   this.op.bind(this)
+    if(this.id)
+      this.service.update(this.service.currentItem).subscribe(this.addEditSuccess );
+    else   
+      this.service.add(this.service.currentItem).subscribe(x => this.addEditSuccess(x) );
+  }
+  addEditSuccess(x){
+    this.location.back();
+    this.service.resetCurrent();
+  }
+
+  preprocess(x){
+    return x;
   }
 
   ngOnInit() {}

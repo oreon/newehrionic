@@ -26,12 +26,13 @@ export class AddEditPatientComponent extends BaseAddEditPage implements OnInit {
 
   public createForm(): void {
     this.form = this.formBuilder.group({
-      firstName: ["", [Validators.required]],
-      lastName: ["", [Validators.required]],
+      firstname: ["", [Validators.required]],
+      lastname: ["", [Validators.required]],
       gender: ["", [Validators.required]],
-      dob: ["", [Validators.required]],
-      pmf: ["", []],
-      fmh: ["", []]
+      birthday: ["", [Validators.required]],
+      phone: ["", [Validators.required]],
+      medicalHistory: ["", []],
+      familyHistory: ["", []]
     });
   }
 
@@ -39,5 +40,10 @@ export class AddEditPatientComponent extends BaseAddEditPage implements OnInit {
 
   getForm() {
     return this.form;
+  }
+
+  preprocess(x){
+    x.birthday = x.birthday.split('T')[0]
+    return x;
   }
 }

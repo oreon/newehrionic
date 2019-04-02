@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Patient</ion-title>
+    <ion-title>Create Note</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -10,43 +10,49 @@
   <form [formGroup]="form">
     <ion-list>
       <ion-item>
-        <ion-label position="stacked">First name * </ion-label>
+        <ion-label position="stacked">Firstname * </ion-label>
         <ion-input
-          formControlName="firstName"
-          id="firstName-input"
+          formControlName="firstname"
+          id="firstname-input"
           class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+          [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }"
           type="text"
         >
         </ion-input>
       </ion-item>
       <ion-item
         class="invalid-feedback"
-        *ngIf="submitted && f.firstName.errors"
+        *ngIf="submitted && f.firstname.errors"
       >
-        <p *ngIf="f.firstName.errors.required">Required !</p>
+        <p *ngIf="f.firstname.errors.required">Required !</p>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Last name * </ion-label>
+        <ion-label position="stacked">Lastname * </ion-label>
         <ion-input
-          formControlName="lastName"
-          id="lastName-input"
+          formControlName="lastname"
+          id="lastname-input"
           class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+          [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"
           type="text"
         >
         </ion-input>
       </ion-item>
-      <ion-item class="invalid-feedback" *ngIf="submitted && f.lastName.errors">
-        <p *ngIf="f.lastName.errors.required">Required !</p>
+      <ion-item class="invalid-feedback" *ngIf="submitted && f.lastname.errors">
+        <p *ngIf="f.lastname.errors.required">Required !</p>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Gender * </ion-label>
-        <ion-select placeholder="Select One" formControlName="gender">
-          <ion-select-option value="Male">MALE</ion-select-option>
-          <ion-select-option value="Female">FEMALE</ion-select-option>
+        <ion-select
+          placeholder="Select One"
+          formControlName="gender"
+          id="gender-input"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"
+        >
+          <ion-select-option value="M">MALE</ion-select-option>
+          <ion-select-option value="F">FEMALE</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item class="invalid-feedback" *ngIf="submitted && f.gender.errors">
@@ -54,39 +60,65 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Dob * </ion-label>
-        <ion-datetime display-format="MMM DD, YYYY" formControlName="dob"></ion-datetime>
+        <ion-label position="stacked">Birthday * </ion-label>
+        <ion-datetime
+          display-format="YYYY-MM-DD"
+          picker-format="DD MMM YYYY"
+          formControlName="birthday"
+          id="birthday-input"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }"
+        ></ion-datetime>
       </ion-item>
-      <ion-item class="invalid-feedback" *ngIf="submitted && f.dob.errors">
-        <p *ngIf="f.dob.errors.required">Required !</p>
+      <ion-item class="invalid-feedback" *ngIf="submitted && f.birthday.errors">
+        <p *ngIf="f.birthday.errors.required">Required !</p>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Pmf </ion-label>
-        <ion-textarea
-          formControlName="pmf"
-          id="pmf-input"
+        <ion-label position="stacked">Phone * </ion-label>
+        <ion-input
+          formControlName="phone"
+          id="phone-input"
           class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.pmf.errors }"
-        ></ion-textarea>
-      </ion-item>
-      <ion-item class="invalid-feedback" *ngIf="submitted && f.pmf.errors">
-        <p *ngIf="f.pmf.errors.required">Required !</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Fmh </ion-label>
-        <ion-textarea
-          formControlName="fmh"
-          id="fmh-input"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.fmh.errors }"
+          [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"
           type="text"
         >
-        </ion-textarea>
+        </ion-input>
       </ion-item>
-      <ion-item class="invalid-feedback" *ngIf="submitted && f.fmh.errors">
-        <p *ngIf="f.fmh.errors.required">Required !</p>
+      <ion-item class="invalid-feedback" *ngIf="submitted && f.phone.errors">
+        <p *ngIf="f.phone.errors.required">Required !</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Medical history </ion-label>
+        <ion-textarea
+          formControlName="medicalHistory"
+          id="medicalHistory-input"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.medicalHistory.errors }"
+        ></ion-textarea>
+      </ion-item>
+      <ion-item
+        class="invalid-feedback"
+        *ngIf="submitted && f.medicalHistory.errors"
+      >
+        <p *ngIf="f.medicalHistory.errors.required">Required !</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Family history </ion-label>
+        <ion-textarea
+          formControlName="familyHistory"
+          id="familyHistory-input"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.familyHistory.errors }"
+        ></ion-textarea>
+      </ion-item>
+      <ion-item
+        class="invalid-feedback"
+        *ngIf="submitted && f.familyHistory.errors"
+      >
+        <p *ngIf="f.familyHistory.errors.required">Required !</p>
       </ion-item>
     </ion-list>
     <ion-row class="signin">
