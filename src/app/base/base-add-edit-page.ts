@@ -22,8 +22,12 @@ export abstract class BaseAddEditPage {
     if(this.id){
       this.service.get(+this.id).subscribe(
         x => { 
-          x = _.omit(x, ['id']);
-          this.form.setValue(x)
+          //x = _.omit(x, ['id']);
+          console.log(this.form.controls)
+          _.keys(this.form.controls).forEach(key => {
+            this.form.get(key).setValue(x[key])
+          });
+          
       }
       )
     }
@@ -70,13 +74,15 @@ export abstract class BaseAddEditPage {
   //   //console.log(op)
   //   this.op.bind(this)
     if(this.id)
-      this.service.update(this.service.currentItem).subscribe(this.addEditSuccess );
+      this.service.update(this.service.currentItem).subscribe(x => this.addEditSuccess(x) );
     else   
       this.service.add(this.service.currentItem).subscribe(x => this.addEditSuccess(x) );
   }
   addEditSuccess(x){
+    
     this.location.back();
-    this.service.resetCurrent();
+    if(this.id)
+      this.service.resetCurrent();
   }
 
   preprocess(x){

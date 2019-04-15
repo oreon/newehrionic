@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { PatientService } from '../../services/patients.service';
+import { PatientService } from '../../../services/patients.service';
 
 @Component({
   selector: 'app-patient-details',
@@ -10,16 +10,17 @@ import { PatientService } from '../../services/patients.service';
 })
 export class PatientDetailsPage implements OnInit {
   entity = null
+  id = null;
 
   constructor(private activatedRoute: ActivatedRoute, 
     private patientService: PatientService) { }
 
     ngOnInit() {
       // Get the ID that was passed with the URL
-      let id = this.activatedRoute.snapshot.paramMap.get('id');
+      this.id = this.activatedRoute.snapshot.paramMap.get('id');
    
       // Get the information from the API
-      this.patientService.getDetails(id).subscribe(result => {
+      this.patientService.getDetails(this.id).subscribe(result => {
         this.entity = result;
       });
     }

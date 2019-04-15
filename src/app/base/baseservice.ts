@@ -97,14 +97,12 @@ export abstract class BaseService<T> {
     return of(id);
   }
 
-  /** PUT: update the entityon the server */
+  /** PUT: update the entity on the server */
   update(entity :T): Observable<any> {
-    this.http.put(this.getUrl(), entity, httpOptions).pipe(
+    return this.http.put(this.getUrl() + '/' + entity['id'], entity, httpOptions).pipe(
       tap(_ => this.log(`updated entityid=${entity['id']}`)),
       catchError(this.handleError<any>("update record"))
     );
-
-    return of(entity);
   }
 
   /**

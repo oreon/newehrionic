@@ -1,7 +1,6 @@
 import { ActivatedRoute } from "@angular/router";
-import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-
+import { FormControl } from "@angular/forms";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 export abstract class BaseListPage<T> {
   entities: T[] = [];
@@ -9,8 +8,10 @@ export abstract class BaseListPage<T> {
   public searchControl: FormControl;
   searching = false;
 
+  searchOnserver = false;
+
   constructor(
-    protected noteService: any,
+    protected service: any,
     protected activatedRoute: ActivatedRoute
   ) {
     this.searchControl = new FormControl();
@@ -23,7 +24,7 @@ export abstract class BaseListPage<T> {
   ngOnInit() {
     this.setFilteredItems("");
     let id = this.activatedRoute.snapshot.paramMap.get("id");
-    this.noteService.getAll(+id).subscribe(x => {
+    this.service.getAll(+id).subscribe(x => {
       this.entities = x;
       this.items = this.entities;
     });
@@ -34,24 +35,31 @@ export abstract class BaseListPage<T> {
         distinctUntilChanged()
       )
       .subscribe(search => {
+        console.log(search)
         this.searching = false;
         this.setFilteredItems(search);
       });
   }
 
   setFilteredItems(searchTerm) {
-    if(searchTerm.trim() === ''){
-      this.items = this.entities
+    //debugger;
+    if (searchTerm.trim() === "") {
+      this.items = this.entities;
     }
-    //this.entities = this.dataService.filterItems(searchTerm);
-    this.items = this.entities.filter((x:any) => 
-      this.searchFunction(x)
-      .toLowerCase()
-      .indexOf(searchTerm.toLowerCase()) > -1
+
+    if (this.searchOnserver){
+      this.service.searchData(searchTerm).subscribe( x => this.items = x);
+    }   
+    else
+      this.items = this.entities.filter(
+        (x: any) =>
+          this.searchFunction(x)
+            .toLowerCase()
+            .indexOf(searchTerm.toLowerCase()) > -1
       );
   }
 
-  searchFunction(x){
+  searchFunction(x) {
     return JSON.stringify(x);
   }
 }

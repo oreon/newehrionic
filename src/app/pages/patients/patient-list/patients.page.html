@@ -6,21 +6,19 @@
 
 <ion-content>
   <ion-fab-button color="primary"  routerLink="add">+</ion-fab-button>
-  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
- 
-  <!-- <ion-item>
-    <ion-label>Select Searchtype</ion-label>
-    <ion-select [(ngModel)]="type" (ionChange)="searchChanged($event)">
-      <ion-select-option value="">All</ion-select-option>
-      <ion-select-option value="movie">Movie</ion-select-option>
-      <ion-select-option value="series">Series</ion-select-option>
-      <ion-select-option value="episode">Episode</ion-select-option>
-    </ion-select>
-  </ion-item> -->
+  <ion-content>
+    <ion-searchbar
+    [formControl]="searchControl"
+    (ionChange)="onSearchInput()"
+  ></ion-searchbar>
+
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
  
   <ion-list>
  
-    <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'patients', 'view',item.id]">
+    <ion-item button *ngFor="let item of items" [routerLink]="['/', 'patients', 'view',item.id]">
       <!-- <ion-avatar slot="start">
         <img [src]="item.Poster" *ngIf="item.Poster != 'N/A'">
       </ion-avatar> -->
