@@ -13,7 +13,8 @@ import { PatientsPage } from './patient-list/patients.page';
 const routes: Routes = [
   {
     path: '',
-    component: PatientsPage
+    component: PatientsPage,
+    pathMatch: 'full'
   },
   {
     path: 'view/:id',

@@ -19,9 +19,10 @@ export class AddEditPatientComponent extends BaseAddEditPage implements OnInit {
     protected formBuilder: FormBuilder,
     protected service: PatientService,
     protected activatedRoute: ActivatedRoute,
-    protected location: Location
+    protected location: Location,
+    protected router:Router
   ) {
-    super(formBuilder, service, activatedRoute, location);
+    super(formBuilder, service, activatedRoute, location, router);
   }
 
   public createForm(): void {

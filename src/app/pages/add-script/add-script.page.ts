@@ -18,9 +18,10 @@ export class AddScriptPage extends BaseAddEditPage implements OnInit {
     protected formBuilder: FormBuilder,
     protected  service:ScriptService,
     protected activatedRoute: ActivatedRoute,
-    protected location: Location
+    protected location: Location,
+    protected router:Router
   ) {
-    super(formBuilder, service, activatedRoute, location)
+    super(formBuilder, service, activatedRoute, location, router)
   }
 
   createForm(){

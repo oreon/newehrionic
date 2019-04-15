@@ -4,33 +4,36 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Route, Router, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import * as _ from "lodash";
-import { BaseService } from './baseservice';
-import { Observable, of } from 'rxjs';
+import { BaseService } from "./baseservice";
+import { Observable, of } from "rxjs";
 
 export abstract class BaseAddEditPage {
   public form: FormGroup;
-  id:string = null
+  id: string = null;
+  hasView = true;
+  parentUrl  = null
 
   constructor(
     protected formBuilder: FormBuilder,
-    protected service: any , //BaseService<T>,
+    protected service: any, //BaseService<T>,
     protected activatedRoute: ActivatedRoute,
-    protected location: Location
+    protected location: Location,
+    protected router: Router
   ) {
     this.createForm();
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
-    if(this.id){
-      this.service.get(+this.id).subscribe(
-        x => { 
-          //x = _.omit(x, ['id']);
-          console.log(this.form.controls)
-          _.keys(this.form.controls).forEach(key => {
-            this.form.get(key).setValue(x[key])
-          });
-          
-      }
-      )
+    if (this.id) {
+      this.service.get(+this.id).subscribe(x => {
+        //x = _.omit(x, ['id']);
+        console.log(this.form.controls);
+        _.keys(this.form.controls).forEach(key => {
+          this.form.get(key).setValue(x[key]);
+        });
+      });
     }
+    this.activatedRoute.parent.url.subscribe((urlPath) => {
+      this.parentUrl = urlPath[urlPath.length - 1].path;
+    })
   }
 
   abstract createForm();
@@ -58,34 +61,46 @@ export abstract class BaseAddEditPage {
     return this.form.controls;
   }
 
-  op (x) :Observable<any> {return of();}
+  op(x): Observable<any> {
+    return of();
+  }
 
   submit() {
     this.submitted = true;
 
     if (!this.form.valid) return;
 
-  
     _.assign(this.service.currentItem, this.form.value);
 
-    this.service.currentItem = this.preprocess(this.service.currentItem)
+    this.service.currentItem = this.preprocess(this.service.currentItem);
 
-  //  this.op = this.id ? this.service.update :this.service.add;
-  //   //console.log(op)
-  //   this.op.bind(this)
-    if(this.id)
-      this.service.update(this.service.currentItem).subscribe(x => this.addEditSuccess(x) );
-    else   
-      this.service.add(this.service.currentItem).subscribe(x => this.addEditSuccess(x) );
-  }
-  addEditSuccess(x){
-    
-    this.location.back();
-    if(this.id)
-      this.service.resetCurrent();
+    //  this.op = this.id ? this.service.update :this.service.add;
+    //   //console.log(op)
+    //   this.op.bind(this)
+    if (this.id)
+      this.service
+        .update(this.service.currentItem)
+        .subscribe(x => this.addEditSuccess(x));
+    else
+      this.service
+        .add(this.service.currentItem)
+        .subscribe(x => this.addEditSuccess(x));
   }
 
-  preprocess(x){
+  addEditSuccess(x) {
+    console.log(this.activatedRoute.parent);
+    if (this.hasView)
+      this.router.navigate(
+        ["../" + this.parentUrl, "view", x.id]
+
+        //{queryParams: this.activatedRoute.queryParams, relativeTo: this.activatedRoute}
+      );
+    else this.location.back();
+    // if(this.id)
+    //   this.service.resetCurrent();
+  }
+
+  preprocess(x) {
     return x;
   }
 

@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-fab-button color="primary"  routerLink="add">+</ion-fab-button>
+  <ion-fab-button color="primary"  [routerLink]='["/patients/add"]'>+</ion-fab-button>
   <ion-content>
     <ion-searchbar
     [formControl]="searchControl"

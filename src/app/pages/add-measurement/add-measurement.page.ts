@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { BaseAddEditPage } from "../../base/base-add-edit-page";
 import { FormBuilder, Validators } from "@angular/forms";
 import { MeasurementService } from "../../services/measurement.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { MeasurementTypeService } from '../../services/measurement-type.service';
 
@@ -18,9 +18,10 @@ export class AddMeasurementPage extends BaseAddEditPage implements OnInit {
     protected service: MeasurementService,
     protected activatedRoute: ActivatedRoute,
     protected location: Location,
-    protected measurementTypeService:MeasurementTypeService
+    protected measurementTypeService:MeasurementTypeService,
+    protected router:Router
   ) {
-    super(formBuilder, service, activatedRoute, location);
+    super(formBuilder, service, activatedRoute, location, router);
     this.measurementTypes$ = 
       this.measurementTypeService.getAll(1)
   }

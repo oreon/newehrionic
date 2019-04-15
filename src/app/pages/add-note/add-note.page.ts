@@ -14,14 +14,16 @@ import { BaseAddEditPage } from '../../base/base-add-edit-page';
 })
 export class AddNotePage extends BaseAddEditPage implements OnInit {
   
+  hasView = false;
 
   constructor(
     protected formBuilder: FormBuilder,
     protected  service:NoteService,
     protected activatedRoute: ActivatedRoute,
-    protected location: Location
+    protected location: Location,
+    protected router:Router
   ) {
-    super(formBuilder, service, activatedRoute, location)
+    super(formBuilder, service, activatedRoute, location, router)
   }
 
   createForm(){
