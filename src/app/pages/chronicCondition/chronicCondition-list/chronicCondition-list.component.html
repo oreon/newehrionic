@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>chronicConditions</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab-button color="primary"  [routerLink]='["/chronicConditions/add"]'>+</ion-fab-button>
+    <ion-content>
+        <ion-searchbar
+                [formControl]="searchControl"
+                (ionChange)="onSearchInput()"
+        ></ion-searchbar>
+
+        <div *ngIf="searching" class="spinner-container">
+            <ion-spinner></ion-spinner>
+        </div>
+
+        <ion-list>
+
+            <ion-item button *ngFor="let item of items" [routerLink]="['/', 'chronicConditions', 'view',item.id]">
+                <!-- <ion-avatar slot="start">
+                  <img [src]="item.Poster" *ngIf="item.Poster != 'N/A'">
+                </ion-avatar> -->
+
+                <ion-label text-wrap>
+                    <h3>{{ item.displayName }} </h3>
+                </ion-label>
+
+                <!-- <ion-icon slot="end" *ngIf="item.Type == 'movie'" name="videocam"></ion-icon>
+                <ion-icon slot="end" *ngIf="item.Type == 'series'" name="tv"></ion-icon>
+                <ion-icon slot="end" *ngIf="item.Type == 'game'" name="logo-game-controller-b"></ion-icon> -->
+
+            </ion-item>
+
+        </ion-list>
+    </ion-content>

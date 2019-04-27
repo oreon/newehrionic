@@ -11,6 +11,7 @@ import { PatientService } from '../../../services/patients.service';
 export class PatientDetailsPage implements OnInit {
   entity = null
   id = null;
+  editAllowed = () => false;
 
   constructor(private activatedRoute: ActivatedRoute, 
     private patientService: PatientService) { }
@@ -25,8 +26,6 @@ export class PatientDetailsPage implements OnInit {
       });
     }
    
-    openWebsite() {
-      window.open(this.entity.Website, '_blank');
-    }
+    
 
 }

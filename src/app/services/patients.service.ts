@@ -7,13 +7,6 @@ import { environment } from '../../environments/environment';
 import { BaseService } from '../base/baseservice';
 import { MessageService } from '../base/message-service';
 
-export enum SearchType {
-  all = '',
-  movie = 'movie',
-  series = 'series',
-  episode = 'episode'
-}
-
 
 
 @Injectable({

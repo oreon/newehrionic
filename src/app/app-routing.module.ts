@@ -4,6 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'patients', pathMatch: 'full' },
   //{ path: 'home', loadChildren: './home/home.module#HomePageModule' },
+  { path: 'cc', loadChildren: './pages/chronicCondition/chronicCondition.module#ChronicConditionModule' },
   { path: 'patients', loadChildren: './pages/patients/patients.module#PatientsPageModule' },
   { path: 'notes/:id', loadChildren: './pages/notes/notes.module#NotesPageModule' },
   { path: 'add-note', loadChildren: './pages/add-note/add-note.module#AddNotePageModule' },

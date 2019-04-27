@@ -48,7 +48,7 @@ export abstract class BaseListPage<T> {
     }
 
     if (this.searchOnserver){
-      this.service.searchData(searchTerm).subscribe( x => this.items = x);
+      this.service.searchRecords(searchTerm).subscribe( x => this.items = x);
     }   
     else
       this.items = this.entities.filter(

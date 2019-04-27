@@ -3,12 +3,14 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ entity?.lastname }},{{ entity?.firstname }}</ion-title>
+    <ion-title>{{ entity?.displayName }}</ion-title>
   </ion-toolbar>
 </ion-header>
  
 <ion-content padding>
-  
+  <ion-fab-button *ngIf="editAllowed()" color="primary"  [routerLink]="['/patients/edit/' ,  id]">
+    <ion-icon name="create"></ion-icon>
+  </ion-fab-button>
  
   <ion-card *ngIf="entity">
     <ion-card-header>
@@ -20,9 +22,7 @@
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content text-center>
-        <ion-fab-button color="primary"  [routerLink]="['/patients/edit/' ,  id]">
-          <ion-icon name="create"></ion-icon>
-        </ion-fab-button>
+       
       <img [src]="entity.image" class="info-img">
       {{ entity.description }}
     

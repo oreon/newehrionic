@@ -1,0 +1,42 @@
+
+
+
+<ion-header>
+    <ion-toolbar>
+        <ion-title>{{ !entity.id ? 'Add':'Edit' }}ChronicCondition</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <form [formGroup]="form">
+        <ion-list>
+            
+            <ion-item>
+                <ion-label position="stacked">Name * </ion-label>
+<ion-input     formControlName="name"  id="name-input"   class="form-control"
+    [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+ type="text"> </ion-input>
+
+            </ion-item>
+                <ion-item class="invalid-feedback" *ngIf="submitted && f.name.errors ">
+        <p *ngIf="f.name.errors.required">Required !</p>
+    </ion-item>
+
+
+
+        </ion-list>
+        <ion-row class="signin">
+            <ion-col>
+                <ion-button
+                        (click)="submit()"
+                        color="primary"
+                        shape="full"
+                        expand="block"
+                >Add</ion-button
+                >
+            </ion-col>
+        </ion-row>
+    </form>
+</ion-content>
